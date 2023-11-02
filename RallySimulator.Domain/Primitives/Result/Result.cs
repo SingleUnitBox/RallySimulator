@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RallySimulator.Domain.Utility;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
@@ -26,12 +27,12 @@ namespace RallySimulator.Domain.Primitives.Result
             Error = error;
         }
         public static Result Success() => new Result(true, Error.None);
-        public static Result Failure(Error error) => new Result(false, error);
         public static Result<TValue> Success<TValue>(TValue value) => new Result<TValue>(value, true, Error.None);
+        public static Result Failure(Error error) => new Result(false, error);
+        public static Result<TValue> Failure<TValue>(Error error) => new Result<TValue>(default!, false, error);
         public static Result<TValue> Create<TValue>(TValue value, Error error)
             where TValue : class
-            => value is null ? Failure<TValue>(error) : Success(value);
-        public static Result<TValue> Failure<TValue>(Error error) => new Result<TValue>(default!, false, error);
+            => value is null ? Failure<TValue>(error) : Success(value);       
         public static Result FirstFailureOrSuccess(params Result[] results)
         {
             foreach (Result result in results)
@@ -43,5 +44,7 @@ namespace RallySimulator.Domain.Primitives.Result
             }
             return Success();
         }
+
     }
+    
 }

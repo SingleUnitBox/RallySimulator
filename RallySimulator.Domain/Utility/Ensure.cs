@@ -8,9 +8,23 @@ namespace RallySimulator.Domain.Utility
 {
     public static class Ensure
     {
-        public static void NotLessThanOrEqualToZero(int value, string message, string argumentName)
+        public static void GreaterThanZero(int value, string message, string argumentName)
+        {
+            if (value <= 0)
+            {
+                throw new ArgumentException(message, argumentName);
+            }
+        }
+        public static void GreaterThanOrEqualToZero(int value, string message, string argumentName)
         {
             if (value < 0)
+            {
+                throw new ArgumentException (message, argumentName);
+            }
+        }
+        public static void GreaterThanOrEqualToZero(decimal value, string message, string argumentName)
+        {
+            if (value < decimal.Zero)
             {
                 throw new ArgumentException(message, argumentName);
             }
@@ -36,5 +50,6 @@ namespace RallySimulator.Domain.Utility
                 throw new ArgumentException(message, argumentName);
             }
         }
+        
     }
 }
