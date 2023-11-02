@@ -13,6 +13,10 @@ namespace RallySimulator.Domain.Core
         public VehicleSubtype VehicleSubtype => (VehicleSubtype)Id;
         public MalfunctionProbability LightMalfunctionProbability { get; private set; }
         public MalfunctionProbability HeavyMalfunctionProbabilty { get; private set; }
+        private VehicleSubtypeMalfunctionProbability()
+        {
+            
+        }
         public VehicleSubtypeMalfunctionProbability(
             VehicleSubtype vehicleSubtype,
             MalfunctionProbability lightMalfunctionProbability,

@@ -10,6 +10,10 @@ namespace RallySimulator.Domain.Core
 {
     public sealed class VehicleTypeRepairmentLength : Entity
     {
+        private VehicleTypeRepairmentLength()
+        {
+            
+        }
         public VehicleTypeRepairmentLength(VehicleType vehicleType, int repairmentLengthInHours)
             : base((int)vehicleType)
         {

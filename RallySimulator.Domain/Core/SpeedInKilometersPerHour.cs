@@ -12,9 +12,13 @@ namespace RallySimulator.Domain.Core
 {
     public sealed class SpeedInKilometersPerHour : ValueObject
     {
-        public int Value { get; }
-        private SpeedInKilometersPerHour(int value) => Value = value;
-        public static LengthInKilometers operator *(SpeedInKilometersPerHour speed, int numberOfHours)
+        public decimal Value { get; private set; }
+        private SpeedInKilometersPerHour(decimal value) => Value = value;
+        private SpeedInKilometersPerHour()
+        {
+            
+        }
+        public static LengthInKilometers operator *(SpeedInKilometersPerHour speed, decimal numberOfHours)
         {
             Ensure.GreaterThanOrEqualToZero(
                 numberOfHours,
@@ -23,9 +27,9 @@ namespace RallySimulator.Domain.Core
 
             return LengthInKilometers.Create(speed.Value * numberOfHours).Value;
         }
-        public static Result<SpeedInKilometersPerHour> Create(int speed)
+        public static Result<SpeedInKilometersPerHour> Create(decimal speed)
             => Result.Success(speed)
-                .Ensure(x => x > 0, DomainErrors.SpeedInKilometersPerHour.LessThanOrEqualToZero)
+                .Ensure(x => x > decimal.Zero, DomainErrors.SpeedInKilometersPerHour.LessThanOrEqualToZero)
                 .Map(x => new SpeedInKilometersPerHour(x));
         protected override IEnumerable<object> GetAtomicValues()
         {
